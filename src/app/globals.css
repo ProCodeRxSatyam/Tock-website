@@ -24,6 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+  .fitgooglelogo {
+    width: 30px;
+    height: 25px;
+    display: inline;
+  }
+
 
 .btnHover:hover {
   padding-right: 22px;
@@ -41,7 +47,7 @@ body {
   text-align: center;
   margin: 20px 0;
   position: relative;
-  width: 74%;
+  width:20rem;
   color: #f4f8f8;
   font-size: 15px;
 }
@@ -70,7 +76,7 @@ body {
   z-index: 2;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 975px) {
   .outer {
     height: 100vh;
     width: auto;
@@ -108,4 +114,36 @@ body {
   .loginbox form {
     position: absolute;
   }
+  .form{
+    margin-left: 8rem;
+    margin-top: 5rem;
+  }
+}
+
+@media(width < 975px){
+  .logoimgbox{
+    position: relative;
+    width: 100px;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  width: 20rem;
+  color: #f4f8f8;
+  font-size: 15px;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: none;
+}
 }

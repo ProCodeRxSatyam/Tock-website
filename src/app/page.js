@@ -8,10 +8,10 @@ export default function Home() {
       </div>
 
       <div className="loginbox">
-        <form action="" className="ml-30 mt-20">
+        <form action="" className=" form">
           <h1 className="  font-extrabold  text-9xl ">Tock</h1>
           <h3 className="mt-3 font-extrabold pt-6 text-4xl">
-            Welcome ➡️ Elite group
+            Welcome ➡️ Elites
           </h3>
 
           <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-7 px-4 py-2 w-80 text-xl  cursor-pointer">
