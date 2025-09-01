@@ -24,3 +24,88 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.btnHover:hover {
+  padding-right: 22px;
+  background: linear-gradient(90deg, #3a7dff, #9a4dff);
+  transform: translateY(-2px);
+  transition: 0.5s;
+}
+.btnHover:active {
+  background-color: #77a1d3;
+  box-shadow: 2px 2px #666;
+  transform: translateY(4px);
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  width: 74%;
+  color: #f4f8f8;
+  font-size: 15px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #797b7d;
+  z-index: 1;
+}
+.divider::after {
+  left: 0;
+  /* right: 0; */
+}
+.divider::before {
+  right: 0;
+}
+
+.divider span {
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 1000px) {
+  .outer {
+    height: 100vh;
+    width: auto;
+  }
+  .fitgooglelogo {
+    width: 30px;
+    height: 25px;
+    display: inline;
+  }
+  .logoimgbox {
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    width: 50%;
+    margin-left: none;
+    height: 100vh;
+  }
+  .logoimgbox img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .loginbox {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: none;
+    width: 50%;
+    vertical-align: top;
+    height: 100vh;
+  }
+
+  .loginbox form {
+    position: absolute;
+  }
+}
