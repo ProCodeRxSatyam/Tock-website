@@ -1,6 +1,18 @@
-import Image from "next/image";
+"use client"
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
+  
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    router.push('/signup'); // change to your target directory/route
+  };
+
+
+
   return (
     <div className="outer font-sans logo ">
       <div className="logoimgbox">
@@ -28,16 +40,22 @@ export default function Home() {
             <span>OR</span>
           </div>
 
-          <div className="border-2 btnHover border-black text-center font-medium bg-white text-black rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer">
+
+          <div id="btnn" className="border-2 btnHover border-black text-center font-medium bg-white text-black rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer"
+          onClick={handleClick}  >
             Create account
           </div>
+          <div className="blurframe" id="popup">
+            <iframe src="/signup"  className="frameborder" ></iframe>
+          </div>
 
-          <p className="my-6 font-bold text-lg ml-1">Already have an account?</p>
+          <p className="my-6 font-bold text-lg ml-1">
+            Already have an account?
+          </p>
 
           <div className="border-2 btnHover border-white text-center font-semibold rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer">
             Sign in
           </div>
-
         </form>
       </div>
     </div>

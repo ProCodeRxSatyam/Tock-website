@@ -75,7 +75,7 @@ body {
   position: relative;
   z-index: 2;
 }
-
+/* -----------------------------------------Resposive design settings ------------------------------------------------------------ */
 @media (min-width: 975px) {
   .outer {
     height: 100vh;
@@ -147,3 +147,58 @@ body {
   margin-left: none;
 }
 }
+
+/*------------------------------------------------  iFrame css settings ----------------------------------------------------------------------*/
+    /* #btnn {
+      margin: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: dodgerblue;
+      color: white;
+    } */
+
+    /* Blur background overlay (hidden initially) */
+    .blurframe {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      /* backdrop-filter: blur(5px); */
+      /* -webkit-backdrop-filter: blur(1px); */
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 3;
+    }
+
+    /* Frame container */
+    .frameborder {
+      width: 90vh;
+      height: 90vh;
+      border-radius: 5%;
+      background: black;
+    }
+
+    @media(max-width:712px){
+      .frameborder {
+        width: 100vw;
+        height: 100vh;
+        border-radius: none;
+        background: black;
+      }
+    }
+
+    /* Close button inside popup */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+      z-index: 4;
+    }
