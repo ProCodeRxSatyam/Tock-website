@@ -24,12 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-  .fitgooglelogo {
-    width: 30px;
-    height: 25px;
-    display: inline;
-  }
+.fitgooglelogo {
+  width: 30px;
+  height: 25px;
+  display: inline;
+}
 
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
 
 .btnHover:hover {
   padding-right: 22px;
@@ -47,7 +54,7 @@ body {
   text-align: center;
   margin: 20px 0;
   position: relative;
-  width:20rem;
+  width: 20rem;
   color: #f4f8f8;
   font-size: 15px;
 }
@@ -114,14 +121,14 @@ body {
   .loginbox form {
     position: absolute;
   }
-  .form{
+  .form {
     margin-left: 8rem;
     margin-top: 5rem;
   }
 }
 
-@media(width < 975px){
-  .logoimgbox{
+@media (width < 975px) {
+  .logoimgbox {
     position: relative;
     width: 100px;
     left: 50%;
@@ -131,25 +138,25 @@ body {
   }
 
   .divider {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-  width: 20rem;
-  color: #f4f8f8;
-  font-size: 15px;
-}
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    width: 20rem;
+    color: #f4f8f8;
+    font-size: 15px;
+  }
 
-.form{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: none;
-}
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: none;
+  }
 }
 
 /*------------------------------------------------  iFrame css settings ----------------------------------------------------------------------*/
-    /* #btnn {
+/* #btnn {
       margin: 20px;
       padding: 10px 20px;
       font-size: 18px;
@@ -160,45 +167,66 @@ body {
       color: white;
     } */
 
-    /* Blur background overlay (hidden initially) */
-    .blurframe {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      /* backdrop-filter: blur(5px); */
-      /* -webkit-backdrop-filter: blur(1px); */
-      background: rgba(255, 255, 255, 0.1);
-      z-index: 3;
-    }
+/* Blur background overlay (hidden initially) */
+.blurframe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* backdrop-filter: blur(5px); */
+  /* -webkit-backdrop-filter: blur(1px); */
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 3;
+}
 
-    /* Frame container */
-    .frameborder {
-      width: 90vh;
-      height: 90vh;
-      border-radius: 5%;
-      background: black;
-    }
+/* Frame container */
+.frameborder {
+  position: relative;
+  width: 90vh;
+  height: 90vh;
+  overflow: auto;
+  border-radius: 5%;
+  background: black;
+}
 
-    @media(max-width:712px){
+/* --------------------------------------------Signup page css------------------------------------------------------- */
+
+@media(max-width:712px){
       .frameborder {
         width: 100vw;
         height: 100vh;
-        border-radius: none;
+        border: none;
+        overflow: auto;
+        border-radius: 0;
         background: black;
+        position: relative;
+      }
+
+      .frameborder form{
+        width: 100vw;
+        height: 100vh;
+        margin-top: -23%;
+        gap: 3rem;
+      }
+      
+
+      .inputs{
+        box-sizing: content-box;
+        height: 415px;
       }
     }
 
-    /* Close button inside popup */
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 30px;
-      color: white;
-      cursor: pointer;
-      z-index: 4;
-    }
+/* Close button inside popup */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 4;
+}

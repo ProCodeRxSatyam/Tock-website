@@ -1,14 +1,15 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import Signup from "./signup/page";
+import { useAppState } from "./stateprovider";
 
 export default function Home() {
   
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const { showPopup, setShowPopup } = useAppState();
 
   const handleClick = () => {
-    router.push('/signup'); // change to your target directory/route
+    setShowPopup(true);
   };
 
 
@@ -45,15 +46,13 @@ export default function Home() {
           onClick={handleClick}  >
             Create account
           </div>
-          <div className="blurframe" id="popup">
-            <iframe src="/signup"  className="frameborder" ></iframe>
-          </div>
+          {showPopup && <Signup />}
 
           <p className="my-6 font-bold text-lg ml-1">
             Already have an account?
           </p>
 
-          <div className="border-2 btnHover border-white text-center font-semibold rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer">
+          <div className="border-2 btnHover border-white text-center font-semibold rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer" onClick={()=>router.push('/signin')}>
             Sign in
           </div>
         </form>
