@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
 export default function Signup() {
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function Signup() {
             <img
               src="/TockLogo.png"
               alt=""
-              className="w-[50px] bg-black rounded-md"
+              className="w-[50px] bg-black rounded-md" 
             />
           </div>
         </div>

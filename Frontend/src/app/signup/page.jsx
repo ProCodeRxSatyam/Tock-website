@@ -1,10 +1,12 @@
 "use client";
 import { useAppState } from "../stateprovider";
+import  { useRouter } from "next/navigation";
 export default function Signup() {
   const { showPopup, setShowPopup } = useAppState();
+  const Router = useRouter();
 
   const handleClick = () => {
-    setShowPopup(false);
+    Router.push("/");
   };
   return (
    <div className="blurframe">
@@ -16,7 +18,7 @@ export default function Signup() {
          <div className="absolute left-1/2 top-[1%] -translate-x-1/2 mt-2">
           <img src="/TockLogo.png" alt="" className="w-[50px] bg-black rounded-md"/>
          </div>
-      </div>
+      </div> 
       
       <form action="" className="py-15 px-20 flex flex-col gap-7 w-[100%] max-[712px]:py-45">
         <h1 className="text-3xl font-semibold ">Create your account</h1>
