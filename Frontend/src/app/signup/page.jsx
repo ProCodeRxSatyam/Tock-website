@@ -6,6 +6,7 @@ export default function Signup() {
   const Router = useRouter();
 
   const handleClick = () => {
+    setShowPopup(false)
     Router.push("/");
   };
   return (

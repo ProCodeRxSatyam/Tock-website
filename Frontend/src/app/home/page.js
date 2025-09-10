@@ -144,7 +144,7 @@ const TockContentSection = () => {
                 {/* Tweet options would go here */}
               </div>
               <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors">
-                Tweet
+                Post
               </button>
             </div>
           </div>

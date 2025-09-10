@@ -10,7 +10,7 @@ export default function Signup() {
         <div className="w-[100%] bg-black h-[50px] flex sticky top-0 z-10 ">
           <span
             className=" text-3xl ml-[2%] mt-[1%]"
-            onClick={() => router.push("/")}
+            onClick={() => Router.push("/")}
           >
             &#10005;
           </span>
@@ -27,7 +27,7 @@ export default function Signup() {
           action=""
           className="py-15 px-20 flex flex-col gap-7 w-[100%] max-[712px]:py-45"
         >
-          <h1 className="text-3xl font-semibold "> Log in to Tock</h1>
+          <h1 className="text-3xl font-semibold "> Log in to Tock</h1> 
           <input
             type="text"
             placeholder="Name"

@@ -13,7 +13,7 @@ export default function Home() {
   };
 
 
-
+ 
   return (
     <div className="outer font-sans logo ">
       <div className="logoimgbox">
