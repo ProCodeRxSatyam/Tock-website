@@ -1,21 +1,17 @@
 import pg from "pg";
-import env from "dotenv";
+import env from "@dotenvx/dotenvx";
 
 env.config();
 
-
-console.log("PG_USER:", process.env.PG_USER);
-console.log("PG_PASSWORD:", process.env.PG_PASSWORD, typeof process.env.PG_PASSWORD);
-console.log("PG_PORT:", process.env.PG_PORT, typeof process.env.PG_PORT);
 
 const {Pool} = pg;
 
 const db = new Pool({
     user: process.env.PG_USER,
-    host: process,
+    host: process.env.PG_HOST,
     database: process.env.PG_DATABASE,
     password: process.env.PG_PASSWORD,
-    port: 5433,
+    port: process.env.PG_PORT,
     max : 10,
     idleTimeoutMillis: 30000,
 })
