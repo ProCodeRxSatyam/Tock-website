@@ -1,4 +1,4 @@
-import passport, { use } from "passport";
+import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import GoogleStrategy from 'passport-google-oauth2'
 import bcrypt from 'bcrypt';

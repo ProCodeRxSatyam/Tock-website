@@ -4,7 +4,7 @@ import app from "./src/app.js";
 
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 connectDB().then(() => {
   app.listen(PORT, () => {
