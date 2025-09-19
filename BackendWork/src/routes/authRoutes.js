@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { registerUser } from "../controllers/authControllers";
+import { registerUser } from "../controllers/authControllers.js";
 
 const router = express.Router();
 
@@ -20,6 +20,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/register",registerUser);
+router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 
 export default router;

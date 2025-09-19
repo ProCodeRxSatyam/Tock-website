@@ -2,17 +2,17 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import GoogleStrategy from 'passport-google-oauth2'
 import bcrypt from 'bcrypt';
-import db from './database.js';
+import {db} from './database.js';
 
 
 //local Strategy
 passport.use(new LocalStrategy (async (username , password,done)=>{
     try{
-        const result = await db.query("SELCT * FROM user WHERE email = $1",[username]);
+        const result = await db.query('SELECT * FROM "users" WHERE username = $1', [username]);
         if(result.rows.length ===0) return done(null,false,{message : "User not found !"});
-
+        
         const user = result.rows[0];
-        const valid = await bcrypt.compare(password,user.password);
+        const valid = await bcrypt.compare(password,user.password_hash);
 
         if(!valid) return done(null,false,{message: "Invalid Password!"});
         return done(null,user);
