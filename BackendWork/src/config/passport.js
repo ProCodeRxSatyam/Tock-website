@@ -24,14 +24,14 @@ passport.use(new LocalStrategy (async (username , password,done)=>{
 //Google Strategy
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    clientSecret: process.env.GOOGLE_SECRET,
+    callbackURL: "http://localhost:5000/auth/google/tock",
    },
    async(accesToen,refreshToken,profile,done)=>{
     try{
-        const result = await db.query("SELECT * FROM user WHERE email = $1",[profile.email]);
+        const result = await db.query('SELECT * FROM "users" WHERE email = $1',[profile.email]);
         if(result.rows.length === 0){
-            const newUser = await db.query("INSERT INTO user (email,password) VALUES ($1,$2) RETURNING *",[profile.email,"google"]);
+            const newUser = await db.query("INSERT INTO users (email,password_hash) VALUES ($1,$2) RETURNING *",[profile.email,"google"]);
             return done(null,newUser.rows[0]);
         };
         return done(null, result.rows[0]);

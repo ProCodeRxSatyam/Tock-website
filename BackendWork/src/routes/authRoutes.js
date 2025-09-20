@@ -21,6 +21,14 @@ router.post("/login", (req, res, next) => {
 
 router.post("/register",registerUser);
 router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get(
+  "/auth/google/tock",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    // On success, send cookie/session
+    res.redirect("http://localhost:3000/home"); // redirect frontend
+  }
+);
 
 
 export default router;
