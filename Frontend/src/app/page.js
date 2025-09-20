@@ -2,8 +2,21 @@
 import { useRouter } from "next/navigation";
 import Signup from "./signup/page";
 import { useAppState } from "./stateprovider";
+import axios from "axios";
+import { Rss } from "lucide-react";
 
 export default function Home() {
+
+   async function handlegoogleSignup() {
+    try{
+      // const response = axios.get("http://localhost:5000/auth/google")
+      // const authurl = response.data.url;
+
+      window.location.href = "http://localhost:5000/auth/google"
+    }catch(err){
+      console.error(err);
+    }
+   }
   
   const router = useRouter();
   const { showPopup, setShowPopup } = useAppState();
@@ -27,11 +40,13 @@ export default function Home() {
             Welcome ➡️ Elites
           </h3>
 
-          <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-7 px-4 py-2 w-80 text-xl  cursor-pointer">
-            {/* <iframe src="" frameborder="1" title="Sign " width={400} height={60}></iframe> */}
+          <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-7 px-4 py-2 w-80 text-xl  cursor-pointer"
+            onClick={handlegoogleSignup}>
+
             <img src="/Google-logo.svg" alt="" className="fitgooglelogo " />{" "}
             Sign up with Google
           </div>
+          
           <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer">
             <img src="/Apple-logo.svg" alt="" className="fitgooglelogo " /> Sign
             up with Apple
