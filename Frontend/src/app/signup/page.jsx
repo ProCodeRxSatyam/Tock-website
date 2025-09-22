@@ -15,7 +15,7 @@ export default function Signup() {
     <div className="frameborder relative flex flex-col hide-scrollbar  ">
       
       <div className="w-[100%] bg-black h-[50px] flex sticky top-0 z-10 ">
-        <span className=" text-3xl ml-[2%] mt-[1%]" onClick={handleClick}>&#10005;</span>
+        <span className=" text-2xl pl-[1%] ml-[1%] mt-[1%] w-8 h-8 rounded-full hover:bg-gray-900 " onClick={handleClick}>&#10005;</span>
          <div className="absolute left-1/2 top-[1%] -translate-x-1/2 mt-2">
           <img src="/TockLogo.png" alt="" className="w-[50px] bg-black rounded-md"/>
          </div>

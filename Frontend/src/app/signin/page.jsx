@@ -9,7 +9,7 @@ export default function Signup() {
       <div className="frameborder relative flex flex-col hide-scrollbar  ">
         <div className="w-[100%] bg-black h-[50px] flex sticky top-0 z-10 ">
           <span
-            className=" text-3xl ml-[2%] mt-[1%]"
+            className=" text-2xl pl-[1%] ml-[1%] hover:bg-gray-900 mt-[1%]"
             onClick={() => Router.push("/")}
           >
             &#10005;
