@@ -29,9 +29,16 @@ passport.use(new GoogleStrategy({
    },
    async(accesToen,refreshToken,profile,done)=>{
     try{
+        let uname = profile.name.givenName.toLowerCase().replace(/\s+/g, "");;
+        let check = await db.query('SELECT username from "users" WHERE username = $1',[uname]);
+        while(check.rows.length!=0){
+            const rand = Math.floor(Math.random()*1000);
+            uname = `${uname}${rand}`;
+            check = await db.query('SELECT username FROM "users" WHERE username =$1',[uname]);
+        }
         const result = await db.query('SELECT * FROM "users" WHERE email = $1',[profile.email]);
         if(result.rows.length === 0){
-            const newUser = await db.query("INSERT INTO users (email,password_hash) VALUES ($1,$2) RETURNING *",[profile.email,"google"]);
+            const newUser = await db.query("INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING *",[uname,profile.email,"google"]);
             return done(null,newUser.rows[0]);
         };
         return done(null, result.rows[0]);
