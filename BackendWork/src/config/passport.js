@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import GoogleStrategy from 'passport-google-oauth2'
 import bcrypt from 'bcrypt';
 import {db} from './database.js';
-
+import { findUserById } from "../models/userModel.js";
 
 //local Strategy
 passport.use(new LocalStrategy (async (username , password,done)=>{
@@ -50,4 +50,15 @@ passport.use(new GoogleStrategy({
 ));
 
 passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser((user, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await findUserById(id);
+        if (!user) {
+            // User was deleted from database 
+            return done(null, false); // Or clear the session 
+        }
+        done(null, user);
+    } catch (error) {
+        done(error);
+    }
+});

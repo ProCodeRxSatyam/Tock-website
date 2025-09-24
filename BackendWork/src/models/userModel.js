@@ -21,3 +21,11 @@ export async function findUserByEmail(email) {
     );
     return result.rows[0];    
 }
+
+export async function findUserById(id)  {
+    const result = await db.query(
+        "SELECT * FROM users WHERE id = $1",
+        [id]
+    );
+    return result.rows[0];
+}
