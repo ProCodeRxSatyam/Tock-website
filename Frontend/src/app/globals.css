@@ -121,7 +121,7 @@ body {
   .loginbox form {
     position: absolute;
   }
-  .form {
+  .formss {
     margin-left: 8rem;
     margin-top: 5rem;
   }
@@ -146,7 +146,7 @@ body {
     font-size: 15px;
   }
 
-  .form {
+  .formss {
     display: flex;
     flex-direction: column;
     justify-content: center;

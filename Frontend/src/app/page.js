@@ -2,8 +2,7 @@
 import { useRouter } from "next/navigation";
 import Signup from "./signup/page";
 import { useAppState } from "./stateprovider";
-import axios from "axios";
-import { Rss } from "lucide-react";
+
 
 export default function Home() {
 
@@ -34,7 +33,7 @@ export default function Home() {
       </div>
 
       <div className="loginbox">
-        <form action="" className=" form">
+        <div action="" className=" formss">
           <h1 className="  font-extrabold  text-9xl ">Tock</h1>
           <h3 className="mt-3 font-extrabold pt-6 text-4xl">
             Welcome ➡️ Elites
@@ -47,7 +46,8 @@ export default function Home() {
             Sign up with Google
           </div>
           
-          <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer">
+          <div className="border-2 btnHover border-black text-center bg-white text-black rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer"
+            onClick={()=>{alert("There is going some issues with Apple Signup! Please try other methods...")}}>
             <img src="/Apple-logo.svg" alt="" className="fitgooglelogo " /> Sign
             up with Apple
           </div>
@@ -70,7 +70,7 @@ export default function Home() {
           <div className="border-2 btnHover border-white text-center font-semibold rounded-full mt-5 px-4 py-2 w-80 text-xl  cursor-pointer" onClick={()=>router.push('/signin')}>
             Sign in
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
