@@ -35,14 +35,6 @@ export default function Signup() {
   const handleEchange = (e) => {
     setEmailValue(e.target.value);
   };
-  // function handleEchange(e) {
-  //   const inputdiv = document.getElementById("inputdiv");
-  //   if (!isValidEmail(e.target.value)) {
-  //     inputdiv.style.border = "2px solid red";
-  //   } else {
-  //     inputdiv.style.border = "1px solid gray";
-  //   }
-  // }
 
   return (
     <div className="blurframe">
@@ -83,7 +75,7 @@ export default function Signup() {
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: isFocused ? "#60a5fa" : "" }}
+              style={{ borderColor: !isValidEmail(emailValue) && emailValue !== "" ? "#f30b0bff" : isFocused ? "#60a5fa":"" }}
               id="inputdiv"
               onClick={focusInput}
             >
@@ -91,7 +83,7 @@ export default function Signup() {
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
                     isFocused || emailValue !== ""
-                      ? "top-[-17px] text-sm text-blue-500"
+                      ? `top-[-17px] text-sm text-blue-500 ${!isValidEmail(emailValue) && emailValue !==""? "text-red-500" : "text-blue-500"} `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
@@ -113,7 +105,7 @@ export default function Signup() {
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                Please enter valid email !.
+                { emailValue && !isValidEmail(emailValue) && "Please enter a valid email address." }
               </p>
             </div>
           </div>
