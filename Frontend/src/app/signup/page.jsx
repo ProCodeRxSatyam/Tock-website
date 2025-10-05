@@ -1,14 +1,18 @@
 "use client";
 import { useAppState } from "../stateprovider";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Signup() {
   const { showPopup, setShowPopup } = useAppState();
   const Router = useRouter();
   const inputRef = useRef();
-  const [isFocused, setIsFocused] = useState(false);
+  const inputRefP = useRef();
+  const timerRef = useRef(null);
+  const [focusedInput,setFocusedInput] = useState(null);
   const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [isValid, setIsValid] = useState(null);
 
   const handleClick = () => {
     setShowPopup(false);
@@ -18,22 +22,41 @@ export default function Signup() {
   function focusInput() {
     if (inputRef.current) {
       inputRef.current.focus();
+    }else if(inputRefP.current){
+      inputRefP.current.focus();
     }
   }
-  const boxFocused = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
 
   function isValidEmail(email) {
     const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
   }
+  
+  useEffect(() => {
+    if(timerRef.current) {
+      clearTimeout(timerRef.current);
+    } 
+  
+    timerRef.current = setTimeout(() => {
+      if(emailValue.trim() === "") {
+        setIsValid(null);
+      }else{
+        setIsValid(isValidEmail(emailValue));
+      }
+    }, 500);
+
+    return () => {
+      if(timerRef.current) {
+        clearTimeout(timerRef.current);
+      };
+    };
+  }, [emailValue]); 
+
   const handleEchange = (e) => {
     setEmailValue(e.target.value);
+  };
+  const handlePchange = (e) => {
+    setPasswordValue(e.target.value);
   };
 
   return (
@@ -60,30 +83,66 @@ export default function Signup() {
           className="py-15 px-20 flex flex-col gap-7 w-[100%] max-[712px]:py-45"
         >
           <h1 className="text-3xl font-semibold ">Create your account</h1>
+
+
           <input
             type="text"
             placeholder="Name"
             className="w-[100%] h-16 border border-gray-500 rounded-md pl-3  leading-[15rem]"
           />
-          <input
-            type="text"
-            placeholder="Password"
-            className="w-[100%] h-16 border border-gray-500 rounded-md pl-3 leading-[15rem]"
-          />
-
-          {/*----------------------------------------------------------------------------------------- */}
+          {/* --------------------------------------password------------------------------------------------- */}
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValidEmail(emailValue) && emailValue !== "" ? "#f30b0bff" : isFocused ? "#60a5fa":"" }}
+              // style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : isFocused ? "#60a5fa":"" }}
               id="inputdiv"
               onClick={focusInput}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
-                    isFocused || emailValue !== ""
-                      ? `top-[-17px] text-sm text-blue-500 ${!isValidEmail(emailValue) && emailValue !==""? "text-red-500" : "text-blue-500"} `
+                    focusedInput === "password"
+                      ? `top-[-17px] text-sm text-blue-500 `
+                      : "top-0 text-base text-gray-400"
+                  }`}
+                  name="placeholder"
+                >
+                  Password
+                </p>
+              </div>
+              <input
+                ref={inputRefP}
+                type="text"
+                name="Password"
+                className="w-[100%] h-5 mt-8 pl-3 leading-[15rem] border-none outline-none"
+                spellCheck="false"
+                value={passwordValue}
+                onChange={handlePchange}
+                onFocus={()=>{setFocusedInput("password")}}
+                onBlur={()=>{setFocusedInput(null)}}
+              />
+            </div>
+            <div>
+              <p className="text-sm text-red-500 px-3">
+                { false && "Please enter a valid email address." }
+              </p>
+            </div>
+          </div>
+
+
+          {/*------------------------------------------email----------------------------------------------- */}
+          <div>
+            <div
+              className="h-16 border border-gray-500 rounded-md   relative"
+              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "email" ? "#60a5fa":"" }}
+              id="inputdiv"
+              onClick={focusInput}
+            >
+              <div className=" ">
+                <p
+                  className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
+                    focusedInput === "email" || emailValue !== ""
+                      ? `top-[-17px] text-sm text-blue-500 ${!isValid && isValid !== null ? "text-red-500" : "text-blue-500"} `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
@@ -99,13 +158,13 @@ export default function Signup() {
                 spellCheck="false"
                 value={emailValue}
                 onChange={handleEchange}
-                onFocus={boxFocused}
-                onBlur={handleBlur}
+                onFocus={()=>{setFocusedInput("email")}}
+                onBlur={()=>{setFocusedInput(null)}}
               />
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                { emailValue && !isValidEmail(emailValue) && "Please enter a valid email address." }
+                { isValid !== null && !isValid && "Please enter a valid email address." }
               </p>
             </div>
           </div>
