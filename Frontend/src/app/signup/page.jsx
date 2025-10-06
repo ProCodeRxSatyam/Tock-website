@@ -8,8 +8,10 @@ export default function Signup() {
   const Router = useRouter();
   const inputRef = useRef();
   const inputRefP = useRef();
+  const inputRefN = useRef();
   const timerRef = useRef(null);
   const [focusedInput,setFocusedInput] = useState(null);
+  const [nameValue, setNameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [isValid, setIsValid] = useState(null);
@@ -19,11 +21,13 @@ export default function Signup() {
     Router.push("/");
   };
 
-  function focusInput() {
-    if (inputRef.current) {
+  function focusInput(type) {
+    if ( type ==="email" && inputRef.current) {
       inputRef.current.focus();
-    }else if(inputRefP.current){
+    }else if(type ==="password" && inputRefP.current){
       inputRefP.current.focus();
+    }else if(type ==="name" && inputRefN.current){
+      inputRefN.current.focus();
     }
   }
 
@@ -58,6 +62,9 @@ export default function Signup() {
   const handlePchange = (e) => {
     setPasswordValue(e.target.value);
   };
+  const handleNchange = (e) => {
+    setNameValue(e.target.value);
+  };
 
   return (
     <div className="blurframe">
@@ -84,19 +91,51 @@ export default function Signup() {
         >
           <h1 className="text-3xl font-semibold ">Create your account</h1>
 
-
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-[100%] h-16 border border-gray-500 rounded-md pl-3  leading-[15rem]"
-          />
+          {/* ---------------------------------------name-------------------------------------------------- */}
+                    <div>
+            <div
+              className="h-16 border border-gray-500 rounded-md   relative"
+              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "name" ? "#60a5fa":"" }}
+              id="inputdiv"
+              onClick={()=> focusInput("name")}
+            >
+              <div className=" ">
+                <p
+                  className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
+                    focusedInput === "name"
+                      ? `top-[-17px] text-sm text-blue-500 `
+                      : "top-0 text-base text-gray-400"
+                  }`}
+                  name="placeholder"
+                >
+                  Name
+                </p>
+              </div>
+              <input
+                ref={inputRefN}
+                type="text"
+                name="Name"
+                className="w-[100%] h-5 mt-8 pl-3 leading-[15rem] border-none outline-none"
+                spellCheck="false"
+                value={nameValue}
+                onChange={handleNchange}
+                onFocus={()=>{setFocusedInput("name")}}
+                onBlur={()=>{setFocusedInput(null)}}
+              />
+            </div>
+            <div>
+              <p className="text-sm text-red-500 px-3">
+                { false && "Please enter a valid email address." }
+              </p>
+            </div>
+          </div>
           {/* --------------------------------------password------------------------------------------------- */}
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              // style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : isFocused ? "#60a5fa":"" }}
+              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput ==="password" ? "#60a5fa":"" }}
               id="inputdiv"
-              onClick={focusInput}
+              onClick={()=> focusInput("password")}
             >
               <div className=" ">
                 <p
@@ -136,7 +175,7 @@ export default function Signup() {
               className="h-16 border border-gray-500 rounded-md   relative"
               style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "email" ? "#60a5fa":"" }}
               id="inputdiv"
-              onClick={focusInput}
+              onClick={()=> focusInput("email")}
             >
               <div className=" ">
                 <p
