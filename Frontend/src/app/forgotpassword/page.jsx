@@ -93,6 +93,8 @@ export default function Signup() {
                       ? `top-[-17px] text-sm text-blue-500 ${
                           !isValid && isValid !== null
                             ? "text-red-500"
+                            : focusedInput !== "email"
+                            ? "text-gray-400"
                             : "text-blue-500"
                         } `
                       : "top-0 text-base text-gray-400"

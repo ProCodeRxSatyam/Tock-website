@@ -10,10 +10,10 @@ export default function Signup() {
   const inputRefP = useRef();
   const inputRefN = useRef();
   const timerRef = useRef(null);
-  const [focusedInput,setFocusedInput] = useState(null);
-  const [nameValue, setNameValue] = useState("");
+  const [focusedInput, setFocusedInput] = useState(null);
+  const [nameValue, setNameValue] = useState(null);
   const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState(null);
   const [isValid, setIsValid] = useState(null);
 
   const handleClick = () => {
@@ -22,11 +22,11 @@ export default function Signup() {
   };
 
   function focusInput(type) {
-    if ( type ==="email" && inputRef.current) {
+    if (type === "email" && inputRef.current) {
       inputRef.current.focus();
-    }else if(type ==="password" && inputRefP.current){
+    } else if (type === "password" && inputRefP.current) {
       inputRefP.current.focus();
-    }else if(type ==="name" && inputRefN.current){
+    } else if (type === "name" && inputRefN.current) {
       inputRefN.current.focus();
     }
   }
@@ -35,26 +35,26 @@ export default function Signup() {
     const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
   }
-  
+
   useEffect(() => {
-    if(timerRef.current) {
+    if (timerRef.current) {
       clearTimeout(timerRef.current);
-    } 
-  
+    }
+
     timerRef.current = setTimeout(() => {
-      if(emailValue.trim() === "") {
+      if (emailValue.trim() === "") {
         setIsValid(null);
-      }else{
+      } else {
         setIsValid(isValidEmail(emailValue));
       }
     }, 500);
 
     return () => {
-      if(timerRef.current) {
+      if (timerRef.current) {
         clearTimeout(timerRef.current);
-      };
+      }
     };
-  }, [emailValue]); 
+  }, [emailValue]);
 
   const handleEchange = (e) => {
     setEmailValue(e.target.value);
@@ -92,18 +92,31 @@ export default function Signup() {
           <h1 className="text-3xl font-semibold ">Create your account</h1>
 
           {/* ---------------------------------------name-------------------------------------------------- */}
-                    <div>
+          <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "name" ? "#60a5fa":"" }}
+              style={{
+                borderColor:
+                  nameValue === "" && nameValue !== null
+                    ? "#f30b0bff"
+                    : focusedInput === "name"
+                    ? "#60a5fa"
+                    : "",
+              }}
               id="inputdiv"
-              onClick={()=> focusInput("name")}
+              onClick={() => focusInput("name")}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
-                    focusedInput === "name"
-                      ? `top-[-17px] text-sm text-blue-500 `
+                    focusedInput === "name" || nameValue !== null
+                      ? `top-[-17px] text-sm text-blue-500 ${
+                          nameValue === "" && nameValue !== null
+                            ? "text-red-500"
+                            : focusedInput !== "name"
+                            ? "text-gray-400"
+                            : "text-blue-500"
+                        } `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
@@ -119,13 +132,17 @@ export default function Signup() {
                 spellCheck="false"
                 value={nameValue}
                 onChange={handleNchange}
-                onFocus={()=>{setFocusedInput("name")}}
-                onBlur={()=>{setFocusedInput(null)}}
+                onFocus={() => {
+                  setFocusedInput("name");
+                }}
+                onBlur={() => {
+                  setFocusedInput(null);
+                }}
               />
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                { false && "Please enter a valid email address." }
+                {nameValue === "" && nameValue !== null && "What's your name?"}
               </p>
             </div>
           </div>
@@ -133,15 +150,28 @@ export default function Signup() {
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput ==="password" ? "#60a5fa":"" }}
+              style={{
+                borderColor:
+                  passwordValue === "" && passwordValue !== null
+                    ? "#f30b0bff"
+                    : focusedInput === "password"
+                    ? "#60a5fa"
+                    : "",
+              }}
               id="inputdiv"
-              onClick={()=> focusInput("password")}
+              onClick={() => focusInput("password")}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
-                    focusedInput === "password"
-                      ? `top-[-17px] text-sm text-blue-500 `
+                    focusedInput === "password" || passwordValue !== null
+                      ? `top-[-17px] text-sm text-blue-500 ${
+                          passwordValue === "" && passwordValue !== null
+                            ? "text-red-500"
+                            : focusedInput !== "password"
+                            ? "text-gray-400"
+                            : "text-blue-500"
+                        } `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
@@ -157,31 +187,49 @@ export default function Signup() {
                 spellCheck="false"
                 value={passwordValue}
                 onChange={handlePchange}
-                onFocus={()=>{setFocusedInput("password")}}
-                onBlur={()=>{setFocusedInput(null)}}
+                onFocus={() => {
+                  setFocusedInput("password");
+                }}
+                onBlur={() => {
+                  setFocusedInput(null);
+                }}
               />
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                { false && "Please enter a valid email address." }
+                {passwordValue === "" &&
+                  passwordValue !== null &&
+                  "Password field cannot be empty !"}
               </p>
             </div>
           </div>
-
 
           {/*------------------------------------------email----------------------------------------------- */}
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "email" ? "#60a5fa":"" }}
+              style={{
+                borderColor:
+                  !isValid && isValid !== null
+                    ? "#f30b0bff"
+                    : focusedInput === "email"
+                    ? "#60a5fa"
+                    : "",
+              }}
               id="inputdiv"
-              onClick={()=> focusInput("email")}
+              onClick={() => focusInput("email")}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
                     focusedInput === "email" || emailValue !== ""
-                      ? `top-[-17px] text-sm text-blue-500 ${!isValid && isValid !== null ? "text-red-500" : "text-blue-500"} `
+                      ? `top-[-17px] text-sm text-blue-500 ${
+                          !isValid && isValid !== null
+                            ? "text-red-500"
+                            : focusedInput !== "email"
+                            ? "text-gray-400"
+                            : "text-blue-500"
+                        } `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
@@ -197,13 +245,19 @@ export default function Signup() {
                 spellCheck="false"
                 value={emailValue}
                 onChange={handleEchange}
-                onFocus={()=>{setFocusedInput("email")}}
-                onBlur={()=>{setFocusedInput(null)}}
+                onFocus={() => {
+                  setFocusedInput("email");
+                }}
+                onBlur={() => {
+                  setFocusedInput(null);
+                }}
               />
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                { isValid !== null && !isValid && "Please enter a valid email address." }
+                {isValid !== null &&
+                  !isValid &&
+                  "Please enter a valid email address."}
               </p>
             </div>
           </div>

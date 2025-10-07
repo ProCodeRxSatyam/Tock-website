@@ -8,9 +8,9 @@ export default function Signup() {
   const inputRefP = useRef();
   const inputRefN = useRef();
   const [focusedInput, setFocusedInput] = useState(null);
-  const [nameValue, setNameValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-   const [isValid, setIsValid] = useState(null);
+  const [nameValue, setNameValue] = useState(null);
+  const [passwordValue, setPasswordValue] = useState(null);
+  const [isValid, setIsValid] = useState(null);
 
   function focusInput(type) {
     if (type === "password" && inputRefP.current) {
@@ -56,20 +56,33 @@ export default function Signup() {
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "name" ? "#60a5fa":"" }}
+              style={{
+                borderColor:
+                  nameValue === "" && nameValue !== null
+                    ? "#f30b0bff"
+                    : focusedInput === "name"
+                    ? "#60a5fa"
+                    : "",
+              }}
               id="inputdiv"
               onClick={() => focusInput("name")}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
-                    focusedInput === "name"
-                      ? `top-[-17px] text-sm text-blue-500 `
+                    focusedInput === "name" || nameValue !== null
+                      ? `top-[-17px] text-sm text-blue-500 ${
+                          nameValue === "" && nameValue !== null
+                            ? "text-red-500"
+                            : focusedInput !== "name"
+                            ? "text-gray-400"
+                            : "text-blue-500"
+                        } `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
                 >
-                  Name
+                  Email or username
                 </p>
               </div>
               <input
@@ -90,7 +103,7 @@ export default function Signup() {
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                {false && "Please enter a valid email address."}
+                {nameValue === "" && nameValue !== null && "What's your name?"}
               </p>
             </div>
           </div>
@@ -98,15 +111,28 @@ export default function Signup() {
           <div>
             <div
               className="h-16 border border-gray-500 rounded-md   relative"
-              style={{ borderColor: !isValid && isValid !== null ? "#f30b0bff" : focusedInput === "password" ? "#60a5fa":"" }}
+              style={{
+                borderColor:
+                  !isValid && isValid !== null
+                    ? "#f30b0bff"
+                    : focusedInput === "password"
+                    ? "#60a5fa"
+                    : "",
+              }}
               id="inputdiv"
               onClick={() => focusInput("password")}
             >
               <div className=" ">
                 <p
                   className={`absolute px-3 py-5 transition-all duration-200 ease-in-out ${
-                    focusedInput === "password"
-                      ? `top-[-17px] text-sm text-blue-500 `
+                    focusedInput === "password" || passwordValue !== null
+                      ? `top-[-17px] text-sm text-blue-500 ${
+                          passwordValue === "" && passwordValue !== null
+                            ? "text-red-500"
+                            : focusedInput !== "password"
+                            ? "text-gray-400"
+                            : "text-blue-500"
+                        } `
                       : "top-0 text-base text-gray-400"
                   }`}
                   name="placeholder"
