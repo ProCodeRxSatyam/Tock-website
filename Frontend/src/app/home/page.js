@@ -6,6 +6,8 @@ const TockContentSection = () => {
   const [likedTweets, setLikedTweets] = useState(new Set());
   const [retweetedTweets, setRetweetedTweets] = useState(new Set());
   const [bookmarkedTweets, setBookmarkedTweets] = useState(new Set());
+  const [tweet, setTweet] = useState("");
+  const [wordCount, setWordCount] = useState(0);
 
   const toggleLike = (tweetId) => {
     setLikedTweets(prev => {
@@ -41,6 +43,12 @@ const TockContentSection = () => {
       }
       return newSet;
     });
+  };
+
+  const handleTweetCompose = (e) => {
+    setTweet(e.target.value);
+    setWordCount(e.target.value.length);
+    console.log(e.target.value.length);
   };
 
   const tweets = [
@@ -136,12 +144,15 @@ const TockContentSection = () => {
           <div className="flex-1">
             <textarea
               placeholder="What's happening?"
-              className="w-full text-xl placeholder-gray-500 border-none outline-none resize-none"
+              className="w-full text-xl text-black placeholder-gray-500 border-none outline-none resize-none"
               rows={3}
+              onChange={handleTweetCompose}
+              value={tweet}
             />
             <div className="flex justify-between items-center mt-4">
               <div className="flex space-x-4 text-blue-500">
                 {/* Tweet options would go here */}
+                <span className={`text-sm ${wordCount > 280 ? 'text-red-500' : 'text-gray-500'}`}>{wordCount}/280</span>
               </div>
               <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors">
                 Post
