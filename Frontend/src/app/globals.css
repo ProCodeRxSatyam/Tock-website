@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
 }
 
 @theme inline {
@@ -29,6 +30,8 @@ body {
   height: 25px;
   display: inline;
 }
+
+
 
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */

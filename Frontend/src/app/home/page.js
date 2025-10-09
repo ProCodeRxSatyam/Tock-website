@@ -122,7 +122,7 @@ const TockContentSection = () => {
   ];
 
   return (
-    <div className="max-w-2xl mx-auto bg-white min-h-screen">
+    <div className="bg-background text-foreground max-w-2xl mx-auto min-h-screen">
       {/* Header */}
       <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-200 px-4 py-3 flex ">
         <div className='flex-1 text-center'>
@@ -144,7 +144,7 @@ const TockContentSection = () => {
           <div className="flex-1">
             <textarea
               placeholder="What's happening?"
-              className="w-full text-xl text-black placeholder-gray-500 border-none outline-none resize-none"
+              className="w-full text-xl text-black placeholder-gray-500 border-none outline-none resize-none "
               rows={3}
               onChange={handleTweetCompose}
               value={tweet}
@@ -154,7 +154,7 @@ const TockContentSection = () => {
                 {/* Tweet options would go here */}
                 <span className={`text-sm ${wordCount > 280 ? 'text-red-500' : 'text-gray-500'}`}>{wordCount}/280</span>
               </div>
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors">
+              <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-70" disabled={tweet.length === 0 || tweet.length > 280}>
                 Post
               </button>
             </div>
@@ -192,7 +192,7 @@ const TockContentSection = () => {
                 </div>
 
                 {/* Tweet Text */}
-                <div className="text-gray-900 mb-3 leading-relaxed">
+                <div className=" mb-3 leading-relaxed">
                   {tweet.content}
                 </div>
 
