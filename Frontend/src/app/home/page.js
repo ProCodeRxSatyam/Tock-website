@@ -122,14 +122,17 @@ const TockContentSection = () => {
   ];
 
   return (
-    <div className="bg-background text-foreground max-w-2xl mx-auto min-h-screen">
+    <div className=''>
+      
+    <div className=" bg-background text-foreground max-w-2xl mx-auto min-h-screen">
+      <p>hdsh</p>
       {/* Header */}
-      <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-200 px-4 py-3 flex ">
+      <div className="sticky top-0  backdrop-blur-md border-b border-gray-200 px-4 py-3 flex ">
         <div className='flex-1 text-center'>
-        <h1 className="text-xl font-bold text-gray-900">For you</h1>
+        <h1 className="text-xl font-bold ">For you</h1>
         </div>
         <div className='flex-1 text-center'>
-        <h1 className="text-xl font-bold text-gray-900">Following</h1>
+        <h1 className="text-xl font-bold ">Following</h1>
         </div>
       </div>
 
@@ -144,7 +147,7 @@ const TockContentSection = () => {
           <div className="flex-1">
             <textarea
               placeholder="What's happening?"
-              className="w-full text-xl text-black placeholder-gray-500 border-none outline-none resize-none "
+              className="w-full text-xl  placeholder-gray-500 border-none outline-none resize-none "
               rows={3}
               onChange={handleTweetCompose}
               value={tweet}
@@ -154,7 +157,7 @@ const TockContentSection = () => {
                 {/* Tweet options would go here */}
                 <span className={`text-sm ${wordCount > 280 ? 'text-red-500' : 'text-gray-500'}`}>{wordCount}/280</span>
               </div>
-              <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-70" disabled={tweet.length === 0 || tweet.length > 280}>
+              <button className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-50" disabled={tweet.length === 0 || tweet.length > 280}>
                 Post
               </button>
             </div>
@@ -165,7 +168,7 @@ const TockContentSection = () => {
       {/* Timeline */}
       <div className="divide-y divide-gray-200">
         {tweets.map((tweet) => (
-          <article key={tweet.id} className="p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+          <article key={tweet.id} className="p-4  transition-colors cursor-pointer">
             <div className="flex space-x-3">
               {/* Avatar */}
               <img
@@ -178,7 +181,7 @@ const TockContentSection = () => {
               <div className="flex-1 min-w-0">
                 {/* Header */}
                 <div className="flex items-center space-x-2 mb-1">
-                  <h3 className="font-bold text-gray-900 truncate">
+                  <h3 className="font-bold  truncate">
                     {tweet.user.name}
                   </h3>
                   <span className="text-gray-500 text-sm">@{tweet.user.handle}</span>
@@ -284,6 +287,7 @@ const TockContentSection = () => {
           Load more tweets
         </button>
       </div>
+    </div>
     </div>
   );
 };
