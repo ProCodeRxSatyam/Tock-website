@@ -47,6 +47,9 @@ body {
   transform: translateY(-2px);
   transition: 0.5s;
 }
+.btn{
+   background: linear-gradient(90deg, #3a7dff, #9a4dff);
+}
 .btnHover:active {
   background-color: #77a1d3;
   box-shadow: 2px 2px #666;

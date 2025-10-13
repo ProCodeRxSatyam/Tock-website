@@ -143,11 +143,11 @@ const TockContentSection = () => {
 
   return (
     <div className="">
-      <div className=" bg-background text-foreground max-w-2xl mx-auto min-h-screen flex ">
-        <div className=" fixed left-[8%] ">
-          <Sidebar />
-        </div>
-        <div className="overflow-hidden border-x border-gray-800 flex-1 ml-[1%] ">
+      <div className=" bg-background text-foreground max-w-4xl mx-auto min-h-screen flex ">
+
+        <div className="overflow-hidden border-x border-gray-800 flex gap-5 ml-[1%] ">
+          <div className=""><Sidebar /></div>
+          <div className="border border-gray-800">
           {/* Header */}
           <div className="sticky top-0  backdrop-blur-md border-b border-gray-500 px-4 py-3 flex ">
             <div className="flex-1 text-center">
@@ -186,7 +186,7 @@ const TockContentSection = () => {
                     </span>
                   </div>
                   <button
-                    className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-50"
+                    className="btn btnHover text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-50"
                     disabled={tweet.length === 0 || tweet.length > 280}
                   >
                     Post
@@ -330,6 +330,7 @@ const TockContentSection = () => {
             <button className="text-blue-500 hover:text-blue-600 font-medium">
               Load more tweets
             </button>
+          </div>
           </div>
         </div>
       </div>
