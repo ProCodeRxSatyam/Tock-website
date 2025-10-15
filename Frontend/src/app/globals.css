@@ -55,7 +55,12 @@ body {
   box-shadow: 2px 2px #666;
   transform: translateY(4px);
 }
-
+.blueBar{
+  border-bottom-color: blue;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  
+}
 .divider {
   text-align: center;
   margin: 20px 0;

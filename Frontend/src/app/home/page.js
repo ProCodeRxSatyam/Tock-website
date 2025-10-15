@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState , useRef ,useEffect } from "react";
 import {
   Heart,
   MessageCircle,
@@ -16,6 +16,7 @@ const TockContentSection = () => {
   const [bookmarkedTweets, setBookmarkedTweets] = useState(new Set());
   const [tweet, setTweet] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const textareaRef = useRef(null);
 
   const toggleLike = (tweetId) => {
     setLikedTweets((prev) => {
@@ -58,6 +59,14 @@ const TockContentSection = () => {
     setWordCount(e.target.value.length);
     console.log(e.target.value.length);
   };
+
+    useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto"; // reset height
+      textarea.style.height = `${textarea.scrollHeight}px`; // set new height
+    }
+  }, [tweet]);
 
   const tweets = [
     {
@@ -149,11 +158,11 @@ const TockContentSection = () => {
       </div>
 
       {/* Header */}
-      <div className="sticky top-0  backdrop-blur-md border-b border-gray-200 px-4 py-3 flex ">
-        <div className="flex-1 text-center">
+      <div className="sticky top-0  backdrop-blur-md border-b border-gray-200  flex ">
+        <div className="flex-1 text-center hover:bg-gray-800 cursor-pointer py-3">
           <h1 className="text-xl font-bold ">For you</h1>
         </div>
-        <div className="flex-1 text-center">
+        <div className="flex-1 text-center hover:bg-gray-800 cursor-pointer py-3 blueBar">
           <h1 className="text-xl font-bold ">Following</h1>
         </div>
       </div>
@@ -169,10 +178,11 @@ const TockContentSection = () => {
           <div className="flex-1">
             <textarea
               placeholder="What's happening?"
-              className="w-full text-xl  placeholder-gray-500 border-none outline-none resize-none "
-              rows={3}
+              className="w-full text-xl  placeholder-gray-500 border-none outline-none  "
+              rows={1}
               onChange={handleTweetCompose}
               value={tweet}
+              ref = {textareaRef}
             />
             <div className="flex justify-between items-center mt-4">
               <div className="flex space-x-4 text-blue-500">
@@ -197,7 +207,7 @@ const TockContentSection = () => {
       </div>
 
       {/* Timeline */}
-      <div className="divide-y divide-gray-800">
+      <div className="divide-y divide-gray-800 ">
         {tweets.map((tweet) => (
           <article
             key={tweet.id}
