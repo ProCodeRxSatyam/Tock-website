@@ -50,7 +50,7 @@ export default function TockSidebar() {
         </nav>
 
         {/* Post Button */}
-        <button className="btn btnHover text-white font-bold text-lg rounded-full py-3 mt-4 transition-colors">
+        <button className="btn btnHover text-white font-bold text-lg rounded-full py-3 px-7 mt-4 transition-colors">
           Post
         </button>
       </div>
