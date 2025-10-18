@@ -16,6 +16,7 @@ const TockContentSection = () => {
   const [bookmarkedTweets, setBookmarkedTweets] = useState(new Set());
   const [tweet, setTweet] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [activeTab, setActiveTab] = useState("forYou");
   const textareaRef = useRef(null);
 
   const toggleLike = (tweetId) => {
@@ -151,21 +152,34 @@ const TockContentSection = () => {
   ];
 
   return (
-<div className="flex justify-center min-h-screen bg-background text-foreground -translate-x-24">
+    <div className="flex justify-center min-h-screen bg-background text-foreground ">
+      {/* Sidebar (always visible, fixed position) */}
+      <div className="hidden md:flex flex-col w-68  p-4 sticky top-0 h-screen overflow-hidden">
+        <Sidebar />
+      </div>
 
-  {/* Sidebar (always visible, fixed position) */}
-  <div className="hidden md:flex flex-col w-64  p-4 sticky top-0 h-screen overflow-hidden">
-    <Sidebar />
-  </div>
-
-  {/* Main Feed Area */}
-  <div className="flex-1 max-w-2xl border-x border-gray-800 min-h-screen ml-[1rem]">
+      {/* Main Feed Area */}
+      <div className="flex-1 max-w-2xl border-x border-gray-800 min-h-screen ml-[1rem]">
         {/* Header */}
         <div className="sticky top-0  backdrop-blur-md border-b border-gray-200  flex ">
-          <div className="flex-1 text-center hover:bg-gray-800 cursor-pointer py-3">
+          <div
+            className={`flex-1 text-center hover:bg-gray-800 cursor-pointer py-3 ${
+              activeTab === "forYou" ? "blueBar" : ""
+            }`}
+            onClick={() => {
+              setActiveTab("forYou");
+            }}
+          >
             <h1 className="text-xl font-bold ">For you</h1>
           </div>
-          <div className="flex-1 text-center hover:bg-gray-800 cursor-pointer py-3 blueBar">
+          <div
+            className={`flex-1 text-center hover:bg-gray-800 cursor-pointer py-3 ${
+              activeTab === "following" ? "blueBar" : ""
+            }`}
+            onClick={() => {
+              setActiveTab("following");
+            }}
+          >
             <h1 className="text-xl font-bold ">Following</h1>
           </div>
         </div>

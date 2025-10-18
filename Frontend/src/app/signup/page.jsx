@@ -66,6 +66,10 @@ export default function Signup() {
     setNameValue(e.target.value);
   };
 
+  const handleSignupClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="blurframe">
       <div className="frameborder relative flex flex-col hide-scrollbar  ">
@@ -263,7 +267,10 @@ export default function Signup() {
           </div>
           {/*----------------------------------------------------------------------------------------- */}
 
-          <button className="w-[100%] h-16 bg-gray-800 text-white rounded-full mt-[12%] font-semibold hover:bg-gray-500 max-[712]:pt-4 max-[712]:pb-4">
+          <button
+            className="w-[100%] h-16 bg-gray-800 text-white rounded-full mt-[12%] font-semibold hover:bg-gray-500 max-[712]:pt-4 max-[712]:pb-4"
+            onClick={handleSignupClick}
+          >
             Sign up
           </button>
           <p className="text-sm text-gray-600 ">

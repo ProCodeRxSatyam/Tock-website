@@ -28,6 +28,10 @@ export default function Signup() {
     setPasswordValue(e.target.value);
   };
 
+  const handleSigninClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="blurframe">
       <div className="frameborder relative flex flex-col hide-scrollbar  ">
@@ -162,7 +166,10 @@ export default function Signup() {
               </p>
             </div>
           </div>
-          <button className="w-[100%] h-16 bg-gray-800 text-white rounded-full mt-[8%] font-semibold hover:bg-gray-500 max-[712]:pt-4 max-[712]:pb-4">
+          <button
+            className="w-[100%] h-16 bg-gray-800 text-white rounded-full mt-[8%] font-semibold hover:bg-gray-500 max-[712]:pt-4 max-[712]:pb-4"
+            onClick={handleSigninClick}
+          >
             Sign in
           </button>
           <button
