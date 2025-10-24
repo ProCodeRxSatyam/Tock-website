@@ -68,6 +68,7 @@ export default function Signup() {
 
   const handleSignupClick = (e) => {
     e.preventDefault();
+    Router.push("/emailVerification");
   };
 
   return (
@@ -268,7 +269,23 @@ export default function Signup() {
           {/*----------------------------------------------------------------------------------------- */}
 
           <button
-            className="w-[100%] h-16 bg-gray-800 text-white rounded-full mt-[12%] font-semibold hover:bg-gray-500 max-[712]:pt-4 max-[712]:pb-4"
+            disabled={
+              nameValue === null ||
+              nameValue === "" ||
+              passwordValue === null ||
+              passwordValue === "" ||
+              !isValid  
+            }
+            className={`w-[100%] h-16 bg-white text-black rounded-full mt-[12%] font-semibold  max-[712]:pt-4 max-[712]:pb-4
+                ${
+                  nameValue === null ||
+                  nameValue === "" ||
+                  passwordValue === null ||
+                  passwordValue === "" ||
+                  !isValid
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer hover:bg-gray-300"
+                }`}
             onClick={handleSignupClick}
           >
             Sign up
