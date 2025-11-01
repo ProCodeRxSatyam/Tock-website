@@ -12,7 +12,7 @@ export default function Signup() {
   const timerRef = useRef(null);
   const [focusedInput, setFocusedInput] = useState(null);
   const [nameValue, setNameValue] = useState(null);
-  const [emailValue, setEmailValue] = useState("");
+  const {emailValue, setEmailValue} = useAppState();
   const [passwordValue, setPasswordValue] = useState(null);
   const [isValid, setIsValid] = useState(null);
 

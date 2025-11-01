@@ -1,12 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { useAppState } from "../stateprovider";
 
 export default function Signup() {
   const router = useRouter();
   const inputRef = useRef();
   const [focusedInput, setFocusedInput] = useState(null);
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
+  const {emailValue, setEmailValue} = useAppState();
 
   function focusInput() {
     if (inputRef.current) {
@@ -42,14 +44,14 @@ export default function Signup() {
           </div>
         </div>
 
-        <form
+        <div
           action="/api/auth/signin"
           method="POST"
           className="py-15 px-20 flex flex-col gap-7 w-[100%] max-[712px]:py-45"
         >
           <h1 className="text-3xl font-semibold "> We sent you a code</h1>
           <p className="text-gray-600 ">
-            Enter it below to verify your email address.
+           { `Enter it below to verify your email =>  ${emailValue} .`}
           </p>
           <div>
             <div
@@ -103,7 +105,7 @@ export default function Signup() {
           >
             Next
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

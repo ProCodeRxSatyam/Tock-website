@@ -5,9 +5,10 @@ const AppContext = createContext();
 
 export function StateProvider({ children }) {
   const [showPopup, setShowPopup] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
 
   return (
-    <AppContext.Provider value={{ showPopup, setShowPopup }}>
+    <AppContext.Provider value={{ showPopup, setShowPopup, emailValue, setEmailValue }}>
       {children}
     </AppContext.Provider>
   );
