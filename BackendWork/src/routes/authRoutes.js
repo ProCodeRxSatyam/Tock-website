@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { registerUser } from "../controllers/authControllers.js";
+import {requestOtp,verifyOtpService} from "../services/otpService.js";
 
 const router = express.Router();
 
@@ -29,6 +30,6 @@ router.get(
     res.redirect("http://localhost:3000/home"); // redirect frontend
   }
 );
-
+router.get("/emailverify",requestOtp);
 
 export default router;

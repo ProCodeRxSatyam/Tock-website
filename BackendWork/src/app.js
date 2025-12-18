@@ -1,9 +1,9 @@
 import express from 'express';
-import cors from "cors"
+import cors from "cors";
 import session  from 'express-session';
 import passport from 'passport';
 
-import authRoutes from "./routes/authRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
 import "./config/passport.js";
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-     cookie: { maxAge: 24 * 60 * 60 * 1000 }
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
 app.use(express.json());

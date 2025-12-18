@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import GoogleStrategy from 'passport-google-oauth2'
+import GoogleStrategy from 'passport-google-oauth2';
 import bcrypt from 'bcrypt';
 import {db} from './database.js';
 import { findUserById } from "../models/userModel.js";
