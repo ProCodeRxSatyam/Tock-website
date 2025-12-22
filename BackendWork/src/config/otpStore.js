@@ -1,9 +1,10 @@
 // services/otpStore.js  (ESM)
 import Redis from "ioredis";
 import HashOtp from "../utils/hashOtp.js";
+import crypto from "crypto";
+import {setEmailVerified} from "../models/userModel.js";
 
 const redis = new Redis(process.env.REDIS_URL); 
-// Example .env REDIS_URL = redis://localhost:6379
 
 const OTP_EXPIRY = 5 * 60; // 5 min
 const MAX_ATTEMPTS = 5;    // wrong tries allowed
@@ -62,6 +63,11 @@ export async function verifyOTP(email, otp) {
   // OTP correct — delete OTP
   await redis.del(key);
   await redis.del(attemptKey);
+  
+  // Mark email as verified in DB
+  if(isValid){
+    await setEmailVerified(email);
+  }
 
   return { ok: true };
 }
@@ -72,10 +78,11 @@ export async function verifyOTP(email, otp) {
 export async function canRequestOTP(email) {
   const key = `otp:${email}`;
   const ttl = await redis.ttl(key);
+ 
 
   if (ttl > 0) {
     return { ok: false, wait: ttl }; // must wait until expiration
   }
-
+ console.log("req otp checked");
   return { ok: true };
 }

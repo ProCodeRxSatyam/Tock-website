@@ -29,3 +29,11 @@ export async function findUserById(id)  {
     );
     return result.rows[0];
 }
+
+export async function setEmailVerified(email) {
+    const result = await db.query(
+        "UPDATE users SET email_verified = true WHERE email = $1 RETURNING *",
+        [email]
+    );
+    return result.rows[0];
+}

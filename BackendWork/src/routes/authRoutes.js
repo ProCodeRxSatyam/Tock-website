@@ -30,6 +30,18 @@ router.get(
     res.redirect("http://localhost:3000/home"); // redirect frontend
   }
 );
-router.get("/emailverify",requestOtp);
-
+router.post("/emailverify",(req,res)=>{
+  const {email} = req.body;
+  requestOtp(email);
+  res.json({message:"OTP sent to your email"});
+});
+router.post("/verifyOtp",async (req,res)=>{
+  const {email,otp} = req.body;
+  const isVerified = await verifyOtpService(email,otp);
+  if(isVerified){
+    res.json({message:"OTP verified successfully"});
+  }else{
+    res.status(400).json({message:"Invalid OTP"});
+  }
+});
 export default router;
