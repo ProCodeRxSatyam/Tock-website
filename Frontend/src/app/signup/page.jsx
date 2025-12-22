@@ -2,6 +2,7 @@
 import { useAppState } from "../stateprovider";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 export default function Signup() {
   const { showPopup, setShowPopup } = useAppState();
@@ -12,7 +13,7 @@ export default function Signup() {
   const timerRef = useRef(null);
   const [focusedInput, setFocusedInput] = useState(null);
   const [nameValue, setNameValue] = useState(null);
-  const {emailValue, setEmailValue} = useAppState();
+  const { emailValue, setEmailValue } = useAppState();
   const [passwordValue, setPasswordValue] = useState(null);
   const [isValid, setIsValid] = useState(null);
 
@@ -66,9 +67,28 @@ export default function Signup() {
     setNameValue(e.target.value);
   };
 
-  const handleSignupClick = (e) => {
+  const handleSignupClick = async (e) => {
     e.preventDefault();
-    Router.push("/emailVerification");
+    try {
+      const signupRes = await axios.post(
+        process.env.NEXT_PUBLIC_BACKENDAPI_BASE_URL + "/register",
+        {
+          name: nameValue,
+          email: emailValue,
+          password: passwordValue,
+        }
+      );
+      const OtpRes = await axios.post(
+        process.env.NEXT_PUBLIC_BACKENDAPI_BASE_URL + "/emailverify",
+        {
+          email: emailValue,
+        }
+      );
+      console.log(OtpRes);
+    } catch (error) {
+      console.log(error);
+    }
+    Router.push("/emailVerify");
   };
 
   return (
@@ -274,7 +294,7 @@ export default function Signup() {
               nameValue === "" ||
               passwordValue === null ||
               passwordValue === "" ||
-              !isValid  
+              !isValid
             }
             className={`w-[100%] h-16 bg-white text-black rounded-full mt-[12%] font-semibold  max-[712]:pt-4 max-[712]:pb-4
                 ${

@@ -93,6 +93,19 @@ body {
   position: relative;
   z-index: 2;
 }
+
+.fadein {
+  animation: fadeInAnimation 1s ease-in forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} 
+
 /* -----------------------------------------Resposive design settings ------------------------------------------------------------ */
 @media (min-width: 975px) {
   .outer {

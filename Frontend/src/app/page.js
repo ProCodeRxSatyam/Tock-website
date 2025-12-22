@@ -1,7 +1,5 @@
 "use client"
 import { useRouter } from "next/navigation";
-import Signup from "./signup/page";
-import { useAppState } from "./stateprovider";
 
 
 export default function Home() {
@@ -11,17 +9,16 @@ export default function Home() {
       // const response = axios.get("http://localhost:5000/auth/google")
       // const authurl = response.data.url;
 
-      window.location.href = "http://localhost:5000/auth/google"
+      window.location.href = process.env.NEXT_PUBLIC_BACKENDAPI_BASE_URL + "/auth/google";
     }catch(err){
       console.error(err);
     }
    }
   
   const router = useRouter();
-  const { showPopup, setShowPopup } = useAppState();
 
   const handleClick = () => {
-    setShowPopup(true);
+    router.push('/signup');
   };
 
 
@@ -61,7 +58,6 @@ export default function Home() {
           onClick={handleClick}  >
             Create account
           </div>
-          {showPopup && <Signup />}
 
           <p className="my-6 font-bold text-lg ml-1">
             Already have an account?
