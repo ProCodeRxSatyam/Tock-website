@@ -5,20 +5,29 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function Signup() {
-  const { showPopup, setShowPopup } = useAppState();
   const Router = useRouter();
   const inputRef = useRef();
   const inputRefP = useRef();
   const inputRefN = useRef();
   const timerRef = useRef(null);
   const [focusedInput, setFocusedInput] = useState(null);
-  const [nameValue, setNameValue] = useState(null);
-  const { emailValue, setEmailValue } = useAppState();
-  const [passwordValue, setPasswordValue] = useState(null);
+  const {
+    nameValue,
+    setNameValue,
+    emailValue,
+    setEmailValue,
+    passwordValue,
+    setPasswordValue,
+   } = useAppState();
   const [isValid, setIsValid] = useState(null);
 
+  const resetAuthForm = () => {
+    setNameValue(null);
+    setPasswordValue(null);
+  };
+
   const handleClick = () => {
-    setShowPopup(false);
+    resetAuthForm();
     Router.push("/");
   };
 
@@ -69,25 +78,6 @@ export default function Signup() {
 
   const handleSignupClick = async (e) => {
     e.preventDefault();
-    try {
-      const signupRes = await axios.post(
-        process.env.NEXT_PUBLIC_BACKENDAPI_BASE_URL + "/register",
-        {
-          name: nameValue,
-          email: emailValue,
-          password: passwordValue,
-        }
-      );
-      const OtpRes = await axios.post(
-        process.env.NEXT_PUBLIC_BACKENDAPI_BASE_URL + "/emailverify",
-        {
-          email: emailValue,
-        }
-      );
-      console.log(OtpRes);
-    } catch (error) {
-      console.log(error);
-    }
     Router.push("/emailVerify");
   };
 
@@ -296,7 +286,7 @@ export default function Signup() {
               passwordValue === "" ||
               !isValid
             }
-            className={`w-[100%] h-16 bg-white text-black rounded-full mt-[12%] font-semibold  max-[712]:pt-4 max-[712]:pb-4
+            className={`w-[100%] h-16 btn text-black rounded-full mt-[12%] font-semibold  max-[712]:pt-4 max-[712]:pb-4
                 ${
                   nameValue === null ||
                   nameValue === "" ||
@@ -304,7 +294,7 @@ export default function Signup() {
                   passwordValue === "" ||
                   !isValid
                     ? "opacity-50 cursor-not-allowed"
-                    : "cursor-pointer hover:bg-gray-300"
+                    : "cursor-pointer btnHover"
                 }`}
             onClick={handleSignupClick}
           >
