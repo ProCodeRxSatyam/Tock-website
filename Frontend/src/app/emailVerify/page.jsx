@@ -44,7 +44,7 @@ export default function Signup() {
         console.log(OtpRes);
       } catch (error) {
         console.log(error);
-      }finally{
+      } finally {
         setloading(false);
       }
     };
@@ -94,10 +94,13 @@ export default function Signup() {
   return (
     <div className="blurframe">
       {loading ? (
-        <div className="frameborder relative flex flex-col hide-scrollbar " style = {{background:"rgba(4, 4, 4, 1)"}}>
+        <div
+          className="frameborder relative flex flex-col hide-scrollbar "
+          style={{ background: "rgba(4, 4, 4, 1)" }}
+        >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Loader className="" />
-        </div>
+            <Loader className="" />
+          </div>
         </div>
       ) : (
         <div className="frameborder relative flex flex-col hide-scrollbar  ">
@@ -119,13 +122,13 @@ export default function Signup() {
 
           <div
             method="POST"
-            className="py-10 px-20 flex flex-col gap-7 w-[100%] max-[712px]:py-14"
+            className="py-10 px-20 flex flex-col gap-8 w-[100%] max-[712px]:py-14"
           >
-            <h1 className="text-3xl font-semibold "> We sent you a code</h1>
-            <p className="text-gray-600 ">
-              {`Enter it below to verify your email =>  ${emailValue} .`}
-            </p>
             <div>
+              <h1 className="text-3xl font-semibold "> We sent you a code</h1>
+              <p className="text-gray-600 ">
+                {`Enter it below to verify your email =>  ${emailValue} .`}
+              </p>
               <h1 id="NotificationPanel" className="text-red-500 fadein py-2">
                 {" "}
               </h1>

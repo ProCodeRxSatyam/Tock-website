@@ -23,11 +23,9 @@ export default function Signup() {
   const handleNchange = (e) => {
     setNameValue(e.target.value);
   };
-
   const handlePchange = (e) => {
     setPasswordValue(e.target.value);
   };
-
   const handleSigninClick = (e) => {
     e.preventDefault();
   };
@@ -92,7 +90,7 @@ export default function Signup() {
               <input
                 ref={inputRefN}
                 type="text"
-                name="Name"
+                name="Email"
                 className="w-[100%] h-5 mt-8 pl-3 leading-[15rem] border-none outline-none"
                 spellCheck="false"
                 value={nameValue}
@@ -117,7 +115,7 @@ export default function Signup() {
               className="h-16 border border-gray-500 rounded-md   relative"
               style={{
                 borderColor:
-                  !isValid && isValid !== null
+                  passwordValue === "" && passwordValue !== null
                     ? "#f30b0bff"
                     : focusedInput === "password"
                     ? "#60a5fa"
@@ -162,7 +160,7 @@ export default function Signup() {
             </div>
             <div>
               <p className="text-sm text-red-500 px-3">
-                {false && "Please enter a valid email address."}
+                {passwordValue  ==="" && passwordValue !==null && "Password field cannot be empty."}
               </p>
             </div>
           </div>

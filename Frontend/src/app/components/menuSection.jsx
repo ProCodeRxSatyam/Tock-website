@@ -6,16 +6,34 @@ import {
   User,
   MoreHorizontal,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
+import ProfileMenu from "./profileMenu";
 
 export default function TockSidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const btnRef = useRef(null);
+  const popupRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState({ top: 0, left: 0 });
+
+  useLayoutEffect(() => {
+    if (!open || !popupRef.current || !btnRef.current) return;
+
+    const rect = btnRef.current.getBoundingClientRect();
+    const height = popupRef.current.offsetHeight;
+
+    setPos({
+      top: rect.top - height - 1,
+      left: rect.left,
+    });
+  }, [open]);
 
   // toggle popup
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleMenu = () => {
+    setOpen((p) => !p);
+  };
 
   return (
-    <div className="flex flex-col justify-between h-screen bg-background text-white p-4 w-[112%] relative overflow-visible">
+    <div className="flex flex-col justify-between h-screen bg-background text-white px-2 relative overflow-visible">
       {/* Top Section */}
       <div className="flex flex-col gap-2">
         <div className="p-3 w-fit">
@@ -56,7 +74,7 @@ export default function TockSidebar() {
           ))}
         </nav>
 
-        <button className="btn btnHover text-white font-bold text-lg rounded-full py-3 px-7 mt-4 transition-colors">
+        <button className="btn btnHover text-white font-bold text-lg rounded-full py-3 px-0 mt-4 transition-colors">
           Post
         </button>
       </div>
@@ -64,8 +82,9 @@ export default function TockSidebar() {
       {/* Bottom Profile Section */}
       <div className="relative">
         <div
-          className="flex items-center justify-between p-3 rounded-full hover:bg-gray-900 transition-colors cursor-pointer"
+          className="flex items-center justify-between py-3 px-2 gap-10 rounded-full hover:bg-gray-900 transition-colors cursor-pointer"
           onClick={toggleMenu}
+          ref={btnRef}
         >
           <div className="flex items-center gap-3">
             <img
@@ -78,35 +97,38 @@ export default function TockSidebar() {
               <span className="text-gray-500 text-sm">@staphennob93463</span>
             </div>
           </div>
-          <MoreHorizontal className="w-5 h-5" />
+          <MoreHorizontal className="" />
         </div>
 
         {/* Popup Menu */}
-        {isOpen && (
-          <>
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 z-40"
-              onClick={() => setIsOpen(false)}
-            />
 
-            {/* Popup */}
-            <div className="absolute bottom-full left-0 mb-3 w-72 bg-black border border-gray-700 rounded-2xl shadow-2xl z-50 overflow-visible">
-              {/* Arrow */}
-              <div className="absolute -bottom-2 left-6 w-4 h-4 bg-black border-r border-b border-gray-700 transform rotate-45" />
+        <ProfileMenu isOpen={open}>
+          {/* Backdrop */}
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
 
-              {/* Menu Items */}
-              <div className="p-3">
-                <button className="w-full text-left px-4 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors font-medium">
-                  Add an existing account
-                </button>
-                <button className="w-full text-left px-4 py-3 text-white hover:bg-gray-900 rounded-lg transition-colors font-medium">
-                  Log out @staphennob93463
-                </button>
-              </div>
+          {/* Popup */}
+          <div
+            className="fixed z-50 w-72 bg-black border border-gray-700 rounded-2xl shadow-2xl"
+            ref={popupRef}
+            style={{
+              top: pos.top - 12,
+              left: pos.left,
+            }}
+          >
+            {/* Arrow */}
+            <div className="absolute -bottom-2 left-6 w-4 h-4 bg-black border-r border-b border-gray-700 rotate-45" />
+
+            {/* Menu Items */}
+            <div className="p-3">
+              <button className="w-full text-left px-4 py-3 text-white hover:bg-gray-900 rounded-lg font-medium">
+                Add an existing account
+              </button>
+              <button className="w-full text-left px-4 py-3 text-white hover:bg-gray-900 rounded-lg font-medium">
+                Log out @staphennob93463
+              </button>
             </div>
-          </>
-        )}
+          </div>
+        </ProfileMenu>
       </div>
     </div>
   );

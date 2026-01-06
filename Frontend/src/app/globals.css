@@ -106,7 +106,7 @@ body {
   }
 } 
 
-/* -----------------------------------------Resposive design settings ------------------------------------------------------------ */
+/* -----------------------------------------Resposive design settings landing page------------------------------------------------------------ */
 @media (min-width: 975px) {
   .outer {
     height: 100vh;
@@ -288,4 +288,18 @@ body {
 @keyframes l9-1 {
   0%,5%  {rotate:  0deg}
   95%,to {rotate:-60deg}
+}
+
+/* ------------------------------------------- Home  Page ------------------------------------------- */
+.home{
+  display: grid;
+  grid-template-columns: 0.8fr 2fr 1.2fr;
+  
+}
+
+.left {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
 }
